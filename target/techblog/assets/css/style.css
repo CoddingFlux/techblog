@@ -1,0 +1,179 @@
+.primary-background {
+	background-color: #ff9800 !important;
+}
+
+.eye-color {
+	color: #8a8a8a !important;
+}
+
+.banner-clip-path {
+	clip-path: polygon(50% 0%, 100% 0, 100% 100%, 63% 91%, 33% 100%, 0 93%, 0 0);
+}
+
+.cswidth {
+	width: 500px;
+}
+
+.eye {
+	position: relative;
+}
+
+#open, #close {
+	position: absolute;
+	top: 50%;
+	right: 10px;
+	transform: translateY(-50%);
+	font-size: 25px;
+}
+
+#open {
+	display: none;
+}
+
+.usericon {
+	border-radius: 50%;
+	border: 2px solid;
+	padding: 4px;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.profile-pics {
+	border-radius: 100px;
+	object-fit: cover;
+	height: 140px;
+	width: 140px;
+}
+
+.transition-collapse {
+	transition: 2s ease;
+}
+
+.post-pics {
+	object-fit: contain;
+	margin: auto;
+	border: 3px solid #ff9800;
+	height: 250px;
+	width: 150px;
+}
+
+.transi {
+	transition: 0.3s ease;
+}
+
+.active {
+	background-color: #ff9800 !important;
+	border: none;
+}
+
+.ptitle, pudate {
+	font-weight: 500;
+	font-style: italic;
+}
+
+.pdetailimg {
+	max-width: 20rem;
+	height: auto;
+	display: block;
+	margin: 20px auto;
+}
+
+.comment-section {
+	background: white;
+	padding: 15px;
+	border-radius: 8px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.profile-img {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+}
+
+.comment-box {
+	background: #f0f2f5;
+	padding: 10px 15px;
+	border-radius: 15px;
+	display: inline-block;
+	max-width: 90%;
+}
+
+.comment-actions {
+	font-size: 14px;
+	color: #65676b;
+}
+
+.comment-actions a {
+	text-decoration: none;
+	font-weight: 600;
+	margin-right: 10px;
+}
+
+.comment-actions a:hover {
+	text-decoration: underline;
+}
+
+
+.comment-input {
+	background: #f0f2f5;
+	border-radius: 20px;
+	padding: 8px 15px;
+	border: none;
+	width: 100%;
+	outline: none;
+}
+
+.send {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    font-size: 1.3rem;
+    color: #ff9800;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+
+.code-container {
+    background: #1e1e1e; /* VS Code dark background */
+    border-radius: 5px;
+    padding: 0px;
+    overflow-x: auto;
+}
+
+.code-editor {
+    display: flex;
+    font-family: "Courier New", monospace;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.line-numbers {
+    padding-right: 5px;
+    text-align: right;
+    color: #888;
+    user-select: none;
+    width: 80px
+}
+
+.line-number {
+    padding: 0 10px;
+}
+
+.code-content {
+    white-space: pre-wrap;
+    flex-grow: 1;
+    font-size: 0.7rem;
+}
+
+.code-line {
+    padding-left: 10px;
+}
+
+.contamap{
+	border:5px solid #ff9800;
+	padding:10px;
+}

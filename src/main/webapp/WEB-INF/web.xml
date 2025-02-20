@@ -1,0 +1,94 @@
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+
+	<filter>
+		<filter-name>AuthFilter</filter-name>
+		<filter-class>com.techblog.securityconfig.AuthFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>AuthFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<servlet>
+		<servlet-name>Index</servlet-name>
+		<jsp-file>/WEB-INF/pages/index.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Index</servlet-name>
+		<url-pattern>/index</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>allpost</servlet-name>
+		<jsp-file>/WEB-INF/pages/allpost.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>allpost</servlet-name>
+		<url-pattern>/posts</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Login</servlet-name>
+		<jsp-file>/WEB-INF/pages/login.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Login</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Register</servlet-name>
+		<jsp-file>/WEB-INF/pages/register.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Register</servlet-name>
+		<url-pattern>/register</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>post_content</servlet-name>
+		<jsp-file>/WEB-INF/pages/post_content.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>post_content</servlet-name>
+		<url-pattern>/post</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>post_detail</servlet-name>
+		<jsp-file>/WEB-INF/pages/post_detail.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>post_detail</servlet-name>
+		<url-pattern>/pdetail</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>LoadComment</servlet-name>
+		<jsp-file>/WEB-INF/pages/comment.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoadComment</servlet-name>
+		<url-pattern>/comment</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ContactUs</servlet-name>
+		<jsp-file>/WEB-INF/pages/contact.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ContactUs</servlet-name>
+		<url-pattern>/contact</url-pattern>
+	</servlet-mapping>
+
+
+	<welcome-file-list>
+		<welcome-file>index</welcome-file>
+	</welcome-file-list>
+
+</web-app>

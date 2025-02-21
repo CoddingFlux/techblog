@@ -7,22 +7,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
+import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.techblog.entitties.Categories;
 import com.techblog.entitties.Post;
 
+
 public class PostDao {
 
-	Connection con;
+	private Connection con;
 
 	public PostDao(Connection con) {
 		super();
 		this.con = con;
 	}
 
-	private static final Logger logger = LoggerFactory.getLogger(PostDao.class);
+	private static final Logger logger = (Logger) LoggerFactory.getLogger(PostDao.class);
 
 	private static final String GET_ALL_CATEGORIES_QUERY = "SELECT * FROM categories";
 
@@ -42,13 +43,14 @@ public class PostDao {
 
 		List<Categories> list = new ArrayList<Categories>();
 
-		try {
-			PreparedStatement pstmt = con.prepareStatement(GET_ALL_CATEGORIES_QUERY);
-			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
-				Categories category = new Categories(rs.getLong("cid"), rs.getString("cname"),
-						rs.getString("cdescription"));
-				list.add(category);
+		try (PreparedStatement pstmt = con.prepareStatement(GET_ALL_CATEGORIES_QUERY)) {
+
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs.next()) {
+					Categories category = new Categories(rs.getLong("cid"), rs.getString("cname"),
+							rs.getString("cdescription"));
+					list.add(category);
+				}
 			}
 
 		} catch (SQLException e) {
@@ -63,8 +65,7 @@ public class PostDao {
 
 		boolean isSaved = false;
 
-		try {
-				PreparedStatement pstmt = con.prepareStatement(SAVE_POST_QUERY);
+		try (PreparedStatement pstmt = con.prepareStatement(SAVE_POST_QUERY)) {
 
 			pstmt.setString(1, post.getPtitle());
 			pstmt.setString(2, post.getPcontent());
@@ -88,8 +89,7 @@ public class PostDao {
 
 		List<Post> postList = new ArrayList<>();
 
-		try {
-				PreparedStatement pstmt = con.prepareStatement(GET_ALL_POST_QUERY);
+		try (PreparedStatement pstmt = con.prepareStatement(GET_ALL_POST_QUERY)) {
 
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs.next()) {
@@ -106,13 +106,12 @@ public class PostDao {
 
 		return postList;
 	}
-	
+
 	public List<Post> getTopPosts() throws ClassNotFoundException {
 
 		List<Post> postList = new ArrayList<>();
 
-		try {
-				PreparedStatement pstmt = con.prepareStatement(GET_TOP_POST_QUERY);
+		try (PreparedStatement pstmt = con.prepareStatement(GET_TOP_POST_QUERY)) {
 
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs.next()) {
@@ -132,8 +131,7 @@ public class PostDao {
 
 		List<Post> postList = new ArrayList<>();
 
-		try {
-				PreparedStatement pstmt = con.prepareStatement(GET_POSTS_BY_CATEGORY_QUERY);
+		try (PreparedStatement pstmt = con.prepareStatement(GET_POSTS_BY_CATEGORY_QUERY)) {
 
 			pstmt.setLong(1, catid);
 
@@ -154,9 +152,8 @@ public class PostDao {
 
 	public Post getPostByPostId(Long pid) throws ClassNotFoundException {
 
-		try {
-			PreparedStatement pstmt = con.prepareStatement(GET_POST_BY_ID_QUERY);
-		
+		try (PreparedStatement pstmt = con.prepareStatement(GET_POST_BY_ID_QUERY)) {
+
 			pstmt.setLong(1, pid);
 
 			try (ResultSet rs = pstmt.executeQuery()) {
@@ -174,8 +171,8 @@ public class PostDao {
 
 	public String getUserByUid(Long uid) throws ClassNotFoundException {
 
-		try {
-				PreparedStatement pstmt = con.prepareStatement(GET_USER_BY_ID_QUERY);
+		try (PreparedStatement pstmt = con.prepareStatement(GET_USER_BY_ID_QUERY)) {
+
 			pstmt.setLong(1, uid);
 
 			try (ResultSet rs = pstmt.executeQuery()) {

@@ -8,15 +8,18 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+
+import ch.qos.logback.classic.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.techblog.entitties.CustomProperty;
+
 
 @WebServlet("/LogoutServlet")
 public class LogoutServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static final Logger LOGGER = Logger.getLogger(LogoutServlet.class.getName());
+    private static final Logger logger = (Logger) LoggerFactory.getLogger(LogoutServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -41,7 +44,7 @@ public class LogoutServlet extends HttpServlet {
 //                resp.getWriter().print("{\"status\":\"error\", \"message\":\"No active session found\", \"redirect\":\"profile\"}");
             }
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Error during logout", e);
+            logger.error("Error during logout : {}", e);
 //            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Server error during logout.");
         }
     }

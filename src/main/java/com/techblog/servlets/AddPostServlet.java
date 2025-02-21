@@ -3,8 +3,10 @@ package com.techblog.servlets;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+
+import ch.qos.logback.classic.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.techblog.dao.PostDao;
 import com.techblog.entitties.Post;
@@ -25,7 +27,7 @@ import jakarta.servlet.http.Part;
 @MultipartConfig(maxFileSize = 5 * 1024 * 1024) // Limit file size to 5MB
 public class AddPostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final Logger LOGGER = Logger.getLogger(AddPostServlet.class.getName());
+	private static final Logger logger = (Logger) LoggerFactory.getLogger(AddPostServlet.class);
 
 	private final PostDao postDao = new PostDao(ConnectionProvider.getConnection());
 
@@ -68,9 +70,9 @@ public class AddPostServlet extends HttpServlet {
 				pw.print("{\"status\":\"error\", \"message\":\"Database error\"}");
 			}
 		} catch (NumberFormatException e) {
-			LOGGER.log(Level.SEVERE, "Invalid category ID", e);
+			logger.error("Invalid category ID : {}", e);
 		} catch (Exception e) {
-			LOGGER.log(Level.SEVERE, "Error processing post request", e);
+			logger.error("Error processing post request : {}", e);
 		}
 	}
 }

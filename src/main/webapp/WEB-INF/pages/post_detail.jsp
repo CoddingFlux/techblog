@@ -82,9 +82,7 @@
 								}
 								%>
 							</div>
-							<pre class="code-content">
-           					    <%=post.getPcode()%>
-      						</pre>
+							<pre class="code-content"><%=post.getPcode()%></pre>
 						</div>
 					</div>
 

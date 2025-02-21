@@ -44,13 +44,12 @@
 			<version>0.10.2</version>
 		</dependency>
 
-
-		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>2.0.16</version>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.4.14</version>  <!-- Use the latest version -->
 		</dependency>
+
 
 		<!--
         https://mvnrepository.com/artifact/org.glassfish.web/jakarta.servlet.jsp.jstl 

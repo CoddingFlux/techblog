@@ -1,11 +1,11 @@
 package com.techblog.entitties;
 
 public class CustomProperty {
-	
+
 	private String content;
 	private String contentType;
 	private String cssClass;
-	
+
 	public CustomProperty() {
 	}
 
@@ -40,5 +40,4 @@ public class CustomProperty {
 		this.cssClass = cssClass;
 	}
 
-	
 }

@@ -9,7 +9,7 @@ public class CommentReply {
 	private Long pid;
 	private Long coid;
 	private Timestamp rptime;
-	
+
 	public CommentReply() {
 		super();
 	}
@@ -77,9 +77,5 @@ public class CommentReply {
 	public void setRptime(Timestamp rptime) {
 		this.rptime = rptime;
 	}
-	
-	
-	
-	
-	
+
 }

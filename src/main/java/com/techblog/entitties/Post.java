@@ -12,12 +12,12 @@ public class Post {
 	private Timestamp pdate;
 	private Long cid;
 	private Long uid;
-	
+
 	public Post() {
 		super();
 	}
 
-	public Post(String ptitle, String pcontent, String pcode, String pimage,Long cid,Long uid) {
+	public Post(String ptitle, String pcontent, String pcode, String pimage, Long cid, Long uid) {
 		super();
 		this.ptitle = ptitle;
 		this.pcontent = pcontent;
@@ -27,7 +27,8 @@ public class Post {
 		this.uid = uid;
 	}
 
-	public Post(Long pid, String ptitle, String pcontent, String pcode, String pimage, Timestamp pdate, Long cid,Long uid) {
+	public Post(Long pid, String ptitle, String pcontent, String pcode, String pimage, Timestamp pdate, Long cid,
+			Long uid) {
 		super();
 		this.pid = pid;
 		this.ptitle = ptitle;
@@ -38,8 +39,8 @@ public class Post {
 		this.cid = cid;
 		this.uid = uid;
 	}
-	
-	public Post(Long pid, String ptitle, String pcontent, String pcode, String pimage, Timestamp pdate,Long uid) {
+
+	public Post(Long pid, String ptitle, String pcontent, String pcode, String pimage, Timestamp pdate, Long uid) {
 		super();
 		this.pid = pid;
 		this.ptitle = ptitle;
@@ -49,15 +50,13 @@ public class Post {
 		this.pdate = pdate;
 		this.uid = uid;
 	}
-	
+
 	public Post(Long pid, String ptitle, String pcontent) {
 		super();
 		this.pid = pid;
 		this.ptitle = ptitle;
 		this.pcontent = pcontent;
 	}
-
-	
 
 	public Long getPid() {
 		return pid;
@@ -114,8 +113,7 @@ public class Post {
 	public void setCid(Long cid) {
 		this.cid = cid;
 	}
-	
-	
+
 	public Long getUid() {
 		return uid;
 	}
@@ -123,6 +121,5 @@ public class Post {
 	public void setUid(Long uid) {
 		this.uid = uid;
 	}
-	
-	
+
 }

@@ -6,12 +6,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+
+import ch.qos.logback.classic.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class FileManager {
 
-	private static final Logger LOGGER = Logger.getLogger(FileManager.class.getName());
+	private static final Logger logger = (Logger) LoggerFactory.getLogger(FileManager.class);
 
 	// Delete a file at a given path
 	public static boolean deleteFile(String path) {
@@ -19,11 +22,11 @@ public class FileManager {
 		if (file.exists()) {
 			boolean deleted = file.delete();
 			if (!deleted) {
-				LOGGER.warning("Failed to delete file: " + path);
+				logger.error("Failed to delete file: {}", path);
 			}
 			return deleted;
 		}
-		LOGGER.warning("File not found: " + path);
+		logger.error("File not found: {}", path);
 		return false;
 	}
 
@@ -44,10 +47,10 @@ public class FileManager {
 				}
 				bos.flush();
 			}
-			LOGGER.info("File saved successfully: " + path);
+			logger.info("File saved successfully: {}", path);
 			return true;
 		} catch (IOException e) {
-			LOGGER.log(Level.SEVERE, "Error saving file: " + path, e);
+			logger.error("Error saving file: {} : {}", path, e);
 			return false;
 		}
 	}

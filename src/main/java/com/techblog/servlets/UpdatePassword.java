@@ -2,8 +2,10 @@ package com.techblog.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+
+import ch.qos.logback.classic.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.techblog.dao.UserDao;
 import com.techblog.entitties.User;
@@ -21,7 +23,7 @@ import jakarta.servlet.http.HttpSession;
 @MultipartConfig
 public class UpdatePassword extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final Logger LOGGER = Logger.getLogger(UpdatePassword.class.getName());
+	private static final Logger logger = (Logger) LoggerFactory.getLogger(UpdatePassword.class);
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -60,7 +62,7 @@ public class UpdatePassword extends HttpServlet {
 				pw.print("{\"status\":\"error\", \"message\":\"Failed to update password. Please try again.\"}");
 			}
 		} catch (Exception e) {
-			LOGGER.log(Level.SEVERE, "Error updating password", e);
+			logger.error("Error updating password : {}", e);
 //            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred while processing your request.");
 		}
 	}

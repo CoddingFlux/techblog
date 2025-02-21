@@ -45,31 +45,35 @@
 
 
 	<div class="container mt-5">
-		<div class="row align-items-start">
-
-
+		<div class="row align-items-stretch justify-content-center">
+			<!-- Use align-items-stretch to make cards equal height -->
 			<%
-			PostDao pdao = new PostDao(ConnectionProvider.getConnection());
-			List<Post> toppost = pdao.getTopPosts();
-			for (Post list : toppost) {
-			%>
-			<div class="col-12 col-md-3 mb-3">
-				<div class="card shadow">
-					<div class="card-body">
+        PostDao pdao = new PostDao(ConnectionProvider.getConnection());
+        List<Post> toppost = pdao.getTopPosts();
+        for (Post list : toppost) {
+        %>
+			<div class="col-12 col-md-6 col-lg-3 mb-3 d-flex">
+				<!-- Use d-flex for equal height -->
+				<div class="card shadow flex-grow-1">
+					<!-- flex-grow-1 ensures cards fill height -->
+					<div class="card-body d-flex flex-column">
 						<h5 class="card-title"><%=list.getPtitle()%></h5>
-						<p class="card-text"><%=Arrays.stream(list.getPcontent().trim().split(" ")).limit(12).collect(Collectors.joining(" ")) + " ..."%></p>
+						<p class="card-text flex-grow-1"><%=Arrays.stream(list.getPcontent().trim().split(" ")).limit(12).collect(Collectors.joining(" ")) + " ..." %></p>
 						<a
 							href="pdetail?pid=<%=EncoderDecoderProvider.encrypt(list.getPid().toString())%>"
-							class="btn primary-background text-white">Read more</a>
+							class="btn primary-background text-white mt-auto">Read more</a>
+						<!-- mt-auto pushes button to bottom -->
 					</div>
 				</div>
 			</div>
 			<%
-			}
-			%>
+        }
+        %>
+		</div>
+	</div>
 
 
-			<!-- <div class="col-12 col-md-3 mb-3">
+	<!-- <div class="col-12 col-md-3 mb-3">
 				<div class="card shadow">
 					<div class="card-body">
 						<h5 class="card-title">Python Programming</h5>
@@ -147,9 +151,9 @@
 					</div>
 				</div>
 			</div> -->
-		</div>
 	</div>
-<%@ include file="includes/footer.jsp"%>
+	</div>
+	<%@ include file="includes/footer.jsp"%>
 	<%@ include file="includes/scripts.jsp"%>
 </body>
 </html>

@@ -4,19 +4,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import org.slf4j.Logger;
+import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
+
 
 public class LikeDao {
 
-	Connection con;
+	private Connection con;
 
 	public LikeDao(Connection con) {
 		super();
 		this.con = con;
 	}
 
-	private static final Logger logger = LoggerFactory.getLogger(LikeDao.class);
+	private static final Logger logger = (Logger) LoggerFactory.getLogger(LikeDao.class);
 
 	private static final String SAVE_LIKE_QUERY = "INSERT INTO liked (pid,uid) VALUES (?,?)";
 
@@ -30,8 +31,7 @@ public class LikeDao {
 
 		boolean isSaved = false;
 
-		try {
-			PreparedStatement pstmt = con.prepareStatement(SAVE_LIKE_QUERY);
+		try (PreparedStatement pstmt = con.prepareStatement(SAVE_LIKE_QUERY)) {
 
 			pstmt.setLong(1, pid);
 			pstmt.setLong(2, uid);
@@ -49,13 +49,12 @@ public class LikeDao {
 
 		Long postCount = 0l;
 
-		try {
-			PreparedStatement pstmt = con.prepareStatement(COUNT_POST_LIKE_QUERY);
-
+		try (PreparedStatement pstmt = con.prepareStatement(COUNT_POST_LIKE_QUERY)) {
 			pstmt.setLong(1, pid);
-			ResultSet total_post = pstmt.executeQuery();
-			postCount = total_post.next() ? total_post.getLong("total_post") : 0l;
 
+			try (ResultSet total_post = pstmt.executeQuery()) {
+				postCount = total_post.next() ? total_post.getLong("total_post") : 0l;
+			}
 		} catch (Exception e) {
 			logger.error("Error to counting post likes where pid is {} : {} ", pid, e.getMessage(), e);
 		}
@@ -66,8 +65,7 @@ public class LikeDao {
 
 	public boolean isPostLikedByUser(Long pid, Long uid) {
 
-		try {
-			PreparedStatement pstmt = con.prepareStatement(CHECK_LIKE_QUERY);
+		try (PreparedStatement pstmt = con.prepareStatement(CHECK_LIKE_QUERY)) {
 
 			pstmt.setLong(1, pid);
 			pstmt.setLong(2, uid);
@@ -87,8 +85,7 @@ public class LikeDao {
 
 		boolean isPostLikeRemoved = false;
 
-		try {
-			PreparedStatement pstmt = con.prepareStatement(DELETE_LIKE_QUERY);
+		try (PreparedStatement pstmt = con.prepareStatement(DELETE_LIKE_QUERY)) {
 
 			pstmt.setLong(1, pid);
 			pstmt.setLong(2, uid);

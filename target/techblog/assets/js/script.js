@@ -212,7 +212,7 @@ $(document).ready(function() {
 							}
 						});
 					}
-					else if (data.status.trim() === "error") {
+					else if (data.status.trim() === "badwarn") {
 						Swal.fire({
 							title: "Warning!",
 							text: data.message.trim(),
@@ -508,7 +508,6 @@ function sendComment(event, pid, uid) {
 		type: "POST",
 		data: { msg: commentmsg, pid: pid, uid: uid },
 		success: function(data) {
-			console.log(data);
 			if (data.status.trim() === "success") {
 				// Reload comments after successful submission
 				loadComments(pid);

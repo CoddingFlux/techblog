@@ -5,22 +5,23 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.slf4j.Logger;
+import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.techblog.entitties.User;
 import com.techblog.helper.HashingProvider;
 
+
 public class UserDao {
 
-	Connection con;
+	private Connection con;
 
 	public UserDao(Connection con) {
 		super();
 		this.con = con;
 	}
 
-	private static final Logger logger = LoggerFactory.getLogger(UserDao.class);
+	private static final Logger logger = (Logger) LoggerFactory.getLogger(UserDao.class);
 
 	private static final String INSERT_USER_QUERY = "INSERT INTO user (uname, uemail, upassword, ugender, uabout) VALUES (?, ?, ?, ?, ?)";
 
@@ -32,10 +33,26 @@ public class UserDao {
 
 	private static final String GET_USER_BY_UID_QUERY = "SELECT uname,uprofile FROM user WHERE uid=?";
 
+	private static final String GET_REGISTERED_USER_QUERY = "SELECT id FROM user WHERE uemail=?";
+
+	public boolean isUserRegistered(String emailid) {
+	    try (PreparedStatement pstmt = con.prepareStatement(GET_REGISTERED_USER_QUERY)) {
+	        pstmt.setString(1, emailid);
+
+	        try (ResultSet rs = pstmt.executeQuery()) {  // ✅ Use executeQuery() for SELECT
+	            return rs.next();  // ✅ Returns true if a record is found
+	        }
+
+	    } catch (SQLException e) {
+	        logger.error("Error checking if user is registered: {}", e.getMessage(), e);
+	        return false;
+	    }
+	}
+
+
 	// Save user data
 	public boolean saveData(User user) throws ClassNotFoundException {
-		try {
-			PreparedStatement pstmt = con.prepareStatement(INSERT_USER_QUERY);
+		try (PreparedStatement pstmt = con.prepareStatement(INSERT_USER_QUERY)) {
 			pstmt.setString(1, user.getuName());
 			pstmt.setString(2, user.getuEmail());
 			pstmt.setString(3, HashingProvider.hashProvider(user.getuPassword()));
@@ -77,8 +94,8 @@ public class UserDao {
 
 	// Update user data
 	public boolean updateUser(User user) throws ClassNotFoundException {
-		try {
-			PreparedStatement pstmt = con.prepareStatement(UPDATE_USER_QUERY);
+		try (PreparedStatement pstmt = con.prepareStatement(UPDATE_USER_QUERY)) {
+
 			pstmt.setString(1, user.getuName());
 			pstmt.setString(2, user.getuEmail());
 			pstmt.setString(3, user.getuGender());
@@ -95,8 +112,8 @@ public class UserDao {
 
 	// Update password
 	public boolean updatePassword(Long userId, String password) throws ClassNotFoundException {
-		try {
-			PreparedStatement pstmt = con.prepareStatement(UPDATE_PASSWORD_QUERY);
+		try (PreparedStatement pstmt = con.prepareStatement(UPDATE_PASSWORD_QUERY)) {
+
 			pstmt.setString(1, HashingProvider.hashProvider(password));
 			pstmt.setLong(2, userId);
 
@@ -113,7 +130,7 @@ public class UserDao {
 
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) { // Ensure a row exists
-					return new User(rs.getString("uname"),rs.getString("uprofile"));
+					return new User(rs.getString("uname"), rs.getString("uprofile"));
 				}
 			}
 		} catch (SQLException e) {

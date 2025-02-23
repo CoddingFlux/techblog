@@ -3,14 +3,13 @@ package com.techblog.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-
-import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.techblog.dao.UserDao;
 import com.techblog.entitties.User;
 import com.techblog.helper.ConnectionProvider;
 
+import ch.qos.logback.classic.Logger;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;

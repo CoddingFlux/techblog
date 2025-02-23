@@ -3,6 +3,7 @@
 <%@page import="java.util.Arrays"%>
 <%@page import="java.util.stream.Collectors"%>
 <%@page import="com.techblog.entitties.Post"%>
+<%@ page errorPage="error" %>
 <html lang="en">
 <head>
 <meta charset="UTF-8">

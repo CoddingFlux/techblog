@@ -23,7 +23,7 @@ public class AuthFilter implements Filter {
         HttpSession session = req.getSession(false);
         
         String uri = req.getRequestURI();
-        boolean isLoggedIn = (session != null && session.getAttribute("user") != null);
+        boolean isLoggedIn = (session != null && session.getAttribute("jwt_token") != null && JwtUtility.validateToken(session.getAttribute("jwt_token").toString()));
         boolean isLoginRequest = uri.endsWith("login") || uri.endsWith("register") || uri.endsWith("LoginServlet") || uri.endsWith("RegisterServlet");
         boolean isAssetRequest = uri.contains("assets");
         boolean isIndexPage = uri.endsWith("index")|| uri.endsWith("contact") || uri.equals(req.getContextPath() + "/");

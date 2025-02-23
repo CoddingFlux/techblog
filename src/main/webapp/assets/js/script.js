@@ -262,6 +262,82 @@ $(document).ready(function() {
 	});
 	// end on submit event verify data save or not
 
+	// start on submit event verify data and login
+	$("#LoginFormID").on("submit", function(event) {
+
+		event.preventDefault();
+		$("#loginbtn").hide();
+		$("#form_refreshlogin").show();
+
+		let formdata = new FormData(this);
+
+		$.ajax({
+
+			url: "LoginServlet",
+			type: "POST",
+			data: formdata,
+			success:function(data) {
+				if (data.status.trim() === "success") {
+					Swal.fire({
+						title: data.status.trim(),
+						text: data.message.trim(),
+						icon: data.status.trim(),
+						draggable: true,
+						allowOutsideClick: false
+					}).then((result) => {
+						if (result.isConfirmed) {
+							window.location = data.redirect.trim();
+						}
+					});
+				}
+				else if (data.status.trim() === "error") {
+					Swal.fire({
+						title: "Warning!",
+						text: data.message.trim(),
+						icon: "warning",
+						confirmButtonText: "OK",
+						allowOutsideClick: false
+					}).then((result) => {
+						if (result.isConfirmed) {
+							$("#form_refreshlogin").hide();
+							$("#loginbtn").show();
+						}
+					});
+				}
+				else {
+					Swal.fire({
+						icon: "error",
+						title: "Oops !",
+						text: "Something went wrong!",
+						allowOutsideClick: false
+					}).then((result) => {
+						if (result.isConfirmed) {
+							$("#form_refreshlogin").hide();
+							$("#loginbtn").show();
+						}
+					});
+				}
+			},
+			error:function(error) {
+				Swal.fire({
+					icon: "error",
+					title: "Oops " + error + " !",
+					text: "Something went wrong!",
+					allowOutsideClick: false
+				}).then((result) => {
+					if (result.isConfirmed) {
+						$("#form_refreshlogin").hide();
+						$("#loginbtn").show();
+					}
+				});
+			},
+			processData: false,
+			contentType: false
+		});
+
+	});
+	// end on submit event verify data and login
+
 	// start to handle blog-post form...
 
 	$("#add-post-form").on("submit", function(e) {
@@ -461,8 +537,8 @@ function enabledTabKey(textarea) {
 function loadComments(epid) {
 	$.ajax({
 		url: "comment",
-		type:"POST",
-		data:{pid:epid},
+		type: "POST",
+		data: { pid: epid },
 		success: function(data) {
 			$("#msgcontent").html(data)
 		}
@@ -525,6 +601,13 @@ function sendComment(event, pid, uid) {
 
 
 // end send comment
+
+function showLoginRefreshLoader() {
+
+	$("#form_refreshlogin").show();
+
+
+}
 
 /*
 <script>

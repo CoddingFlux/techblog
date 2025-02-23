@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@page import="com.techblog.entitties.CustomProperty"%>
-<%@page errorPage="error_page.jsp"%>
+<%@ page errorPage="error"%>
 
 <html lang="en">
 <head>
@@ -27,7 +27,7 @@
 						<i class="ri-login-circle-line fs-1 text-white"></i>
 						<h2 class="text-white">Login</h2>
 					</div>
-					<%
+				<%-- 	<%
 					CustomProperty cproProperty = (CustomProperty) session.getAttribute("customProperty");
 					if (cproProperty != null) {
 					%>
@@ -40,9 +40,9 @@
 					}
 					session.removeAttribute("customProperty");
 					%>
-
+ --%>
 					<div class="card-body">
-						<form action="<%=application.getContextPath()%>/LoginServlet"
+						<form id="LoginFormID" action="<%=application.getContextPath()%>/LoginServlet"
 							method="post">
 							<div class="mb-3">
 								<label for="userEmail" class="form-label">Email address</label>
@@ -63,10 +63,14 @@
 								</div>
 							</div>
 
-							<div class="text-center mb-2">
+							<div id="form_refreshlogin" class="mb-1 text-center"
+								style="font-size: 1.5rem; display: none;">
+								<span class="fa fa-refresh fa-spin"></span>
+							</div>
 
+							<div id="loginbtn" class="text-center mb-2">
 								<button type="submit"
-									class="btn btn-md primary-background text-white">Submit</button>
+									class="btn btn-md primary-background text-white">LogIn</button>
 							</div>
 							<div class="text-center">
 								<p>
@@ -83,7 +87,7 @@
 	</div>
 	<!-- /banner -->
 
-<%@ include file="includes/footer.jsp"%>
+	<%@ include file="includes/footer.jsp"%>
 	<%@ include file="includes/scripts.jsp"%>
 
 </body>

@@ -5,12 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.techblog.entitties.User;
 import com.techblog.helper.HashingProvider;
 
+import ch.qos.logback.classic.Logger;
 
 public class UserDao {
 
@@ -25,7 +25,7 @@ public class UserDao {
 
 	private static final String INSERT_USER_QUERY = "INSERT INTO user (uname, uemail, upassword, ugender, uabout) VALUES (?, ?, ?, ?, ?)";
 
-	private static final String GET_USER_BY_EMAIL_QUERY = "SELECT uid, uname, uemail, upassword, ugender, uabout, uprofile, uregdate FROM user WHERE uemail=?";
+	private static final String GET_USER_BY_EMAIL_AND_PASSWORD_QUERY = "SELECT uid, uname, uemail, upassword, ugender, uabout, uprofile, uregdate FROM user WHERE uemail=?";
 
 	private static final String UPDATE_USER_QUERY = "UPDATE user SET uname=?, uemail=?, ugender=?, uabout=?, uprofile=? WHERE uid=?";
 
@@ -33,31 +33,32 @@ public class UserDao {
 
 	private static final String GET_USER_BY_UID_QUERY = "SELECT uname,uprofile FROM user WHERE uid=?";
 
-	private static final String GET_REGISTERED_USER_QUERY = "SELECT id FROM user WHERE uemail=?";
+	private static final String GET_USER_BY_EMAIL_QUERY = "SELECT uid,uname,ugender,uabout,uregdate,uprofile FROM user WHERE uemail=?";
+
+	private static final String GET_REGISTERED_USER_QUERY = "SELECT uid FROM user WHERE uemail=?";
 
 	public boolean isUserRegistered(String emailid) {
-	    try (PreparedStatement pstmt = con.prepareStatement(GET_REGISTERED_USER_QUERY)) {
-	        pstmt.setString(1, emailid);
+		try (PreparedStatement pstmt = con.prepareStatement(GET_REGISTERED_USER_QUERY)) {
+			pstmt.setString(1, emailid);
 
-	        try (ResultSet rs = pstmt.executeQuery()) {  // ✅ Use executeQuery() for SELECT
-	            return rs.next();  // ✅ Returns true if a record is found
-	        }
+			try (ResultSet rs = pstmt.executeQuery()) { // ✅ Use executeQuery() for SELECT
+				return rs.next(); // ✅ Returns true if a record is found
+			}
 
-	    } catch (SQLException e) {
-	        logger.error("Error checking if user is registered: {}", e.getMessage(), e);
-	        return false;
-	    }
+		} catch (SQLException e) {
+			logger.error("Error checking if user is registered: {}", e.getMessage(), e);
+			return false;
+		}
 	}
-
 
 	// Save user data
 	public boolean saveData(User user) throws ClassNotFoundException {
 		try (PreparedStatement pstmt = con.prepareStatement(INSERT_USER_QUERY)) {
 			pstmt.setString(1, user.getuName());
 			pstmt.setString(2, user.getuEmail());
-			pstmt.setString(3, HashingProvider.hashProvider(user.getuPassword()));
-			pstmt.setString(4, user.getuGender());
-			pstmt.setString(5, user.getuAbout().isEmpty() ? "Hey, it is a technical blog" : user.getuAbout());
+			pstmt.setString(3, user.getuPassword() == null ? null : HashingProvider.hashProvider(user.getuPassword()));
+			pstmt.setString(4, user.getuGender() == null ? null : user.getuGender());
+			pstmt.setString(5, user.getuAbout() == null ? "Hey, it is a technical blog" : user.getuAbout());
 
 			return pstmt.executeUpdate() > 0;
 		} catch (SQLException e) {
@@ -68,7 +69,7 @@ public class UserDao {
 
 	// Get user by username (email) and verify password
 	public User getUserByUsernameAndPassword(String email, String password) throws ClassNotFoundException {
-		try (PreparedStatement pstmt = con.prepareStatement(GET_USER_BY_EMAIL_QUERY)) {
+		try (PreparedStatement pstmt = con.prepareStatement(GET_USER_BY_EMAIL_AND_PASSWORD_QUERY)) {
 			pstmt.setString(1, email);
 
 			try (ResultSet rs = pstmt.executeQuery()) {
@@ -136,6 +137,23 @@ public class UserDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.error("Error retrieving user by uid {}: {}", uid, e.getMessage(), e);
+		}
+		return null;
+	}
+
+	public User getUserByEmail(String email) throws ClassNotFoundException {
+		try (PreparedStatement pstmt = con.prepareStatement(GET_USER_BY_EMAIL_QUERY)) {
+			pstmt.setString(1, email);
+
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) { // Ensure a row exists
+					return new User(rs.getLong("uid"), rs.getString("uname"), rs.getString("ugender"),
+							rs.getString("uabout"), rs.getString("uprofile"), rs.getTimestamp("uregdate"));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.error("Error retrieving userID by email {}: {}", email, e.getMessage(), e);
 		}
 		return null;
 	}

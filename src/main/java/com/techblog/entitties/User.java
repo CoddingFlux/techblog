@@ -38,7 +38,17 @@ public class User {
 		this.uProfile = uprofile;
 		this.timestamp = timestamp;
 	}
-
+	
+	public User(Long uId, String uName,String uGender, String uAbout, String uprofile,
+			Timestamp timestamp) {
+		this.uId = uId;
+		this.uName = uName;
+		this.uGender = uGender;
+		this.uAbout = uAbout;
+		this.uProfile = uprofile;
+		this.timestamp = timestamp;
+	}
+	
 	public User(String uName, String uEmail, String uPassword, String uGender, String uAbout) {
 		this.uName = uName;
 		this.uEmail = uEmail;
@@ -50,6 +60,13 @@ public class User {
 	// /getters & setters
 
 	public User(String uName, String uProfile) {
+		this.uName = uName;
+		this.uProfile = uProfile;
+	}
+	
+	public User(Long uId,String uEmail,String uName, String uProfile) {
+		this.uId=uId;
+		this.uEmail=uEmail;
 		this.uName = uName;
 		this.uProfile = uProfile;
 	}

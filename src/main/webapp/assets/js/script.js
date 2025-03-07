@@ -276,7 +276,7 @@ $(document).ready(function() {
 			url: "LoginServlet",
 			type: "POST",
 			data: formdata,
-			success:function(data) {
+			success: function(data) {
 				if (data.status.trim() === "success") {
 					Swal.fire({
 						title: data.status.trim(),
@@ -318,7 +318,7 @@ $(document).ready(function() {
 					});
 				}
 			},
-			error:function(error) {
+			error: function(error) {
 				Swal.fire({
 					icon: "error",
 					title: "Oops " + error + " !",
@@ -577,6 +577,8 @@ function sendComment(event, pid, uid) {
 		})
 		return;
 	}
+	
+	let counter = parseInt($("#cocounter").text().trim()) || 0;
 
 	// Send the comment via AJAX
 	$.ajax({
@@ -587,6 +589,8 @@ function sendComment(event, pid, uid) {
 			if (data.status.trim() === "success") {
 				// Reload comments after successful submission
 				loadComments(pid);
+				counter++;
+				$("#cocounter").text(counter);
 				$("#msgcomm").val(""); // Clear the input after submitting
 			} else {
 				alert("Failed to submit comment. Please try again.");

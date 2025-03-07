@@ -20,11 +20,17 @@ public class AuthFilter implements Filter {
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
+        
+        res.setHeader("Access-Control-Allow-Origin", "*"); // Allow all origins or specify domain
+        res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+        res.setHeader("Access-Control-Allow-Credentials", "true");
+        
         HttpSession session = req.getSession(false);
         
         String uri = req.getRequestURI();
         boolean isLoggedIn = (session != null && session.getAttribute("jwt_token") != null && JwtUtility.validateToken(session.getAttribute("jwt_token").toString()));
-        boolean isLoginRequest = uri.endsWith("login") || uri.endsWith("register") || uri.endsWith("LoginServlet") || uri.endsWith("RegisterServlet");
+        boolean isLoginRequest = uri.endsWith("login") || uri.endsWith("register") || uri.endsWith("LoginServlet") || uri.endsWith("RegisterServlet") || uri.endsWith("GoogleSignInServlet");
         boolean isAssetRequest = uri.contains("assets");
         boolean isIndexPage = uri.endsWith("index")|| uri.endsWith("contact") || uri.equals(req.getContextPath() + "/");
 

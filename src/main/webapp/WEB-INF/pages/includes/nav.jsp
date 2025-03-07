@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
 <%@page import="com.techblog.entitties.Categories"%>
 <%@page import="java.util.ArrayList"%>
@@ -25,11 +26,13 @@
 
 				<%
 				User user1 = (User) session.getAttribute("user");
-						if (user1 == null) {
+				if (user1 == null) {
 				%>
-				<li class="nav-item"><a class="nav-link" href="<%=application.getContextPath()%>/login"><i
+				<li class="nav-item"><a class="nav-link"
+					href="<%=application.getContextPath()%>/login"><i
 						class="ri-login-circle-line"></i> Login</a></li>
-				<li class="nav-item"><a class="nav-link" href="<%=application.getContextPath()%>/register"><span><i
+				<li class="nav-item"><a class="nav-link"
+					href="<%=application.getContextPath()%>/register"><span><i
 							class="ri-user-smile-line"></i></span> Register</a></li>
 				<%
 				} else {
@@ -55,7 +58,8 @@
 						</li>
 						<li><a class="dropdown-item" href="#">Data Structure</a></li>
 					</ul></li>
-				<li class="nav-item"><a class="nav-link" href="<%= application.getContextPath()%>/contact"><span><i
+				<li class="nav-item"><a class="nav-link"
+					href="<%=application.getContextPath()%>/contact"><span><i
 							class="ri-contacts-line"></i></span> Contact</a></li>
 			</ul>
 			<!-- Logout as a right-aligned list item -->
@@ -68,7 +72,8 @@
 				<span class="text-white me-3 pointer" data-bs-toggle="modal"
 					data-bs-target="#profile-modal"><i
 					class="ri-user-line usericon"></i> <%=user1.getuName()%></span> <a
-					href="<%=application.getContextPath()%>/LogoutServlet" class="btn btn-outline-light">Logout</a>
+					href="<%=application.getContextPath()%>/LogoutServlet"
+					class="btn btn-outline-light">Logout</a>
 			</div>
 			<%
 			}
@@ -97,8 +102,11 @@ if (user1 != null) {
 				<div class="container">
 
 					<div class="text-center">
-						<img class="image-fluid profile-pics " class="" alt="user_profile"
-							src="assets/pics/<%=user1.getuProfile()%>"> <br>
+						
+
+						<img class="image-fluid profile-pics"
+							src="assets/pics/<%=user1.getuProfile()%>"
+							alt="user_profile" loading="lazy"/>
 
 						<h5 class="lead mt-3 mb-3"><%=user1.getuName()%></h5>
 					</div>
@@ -124,9 +132,11 @@ if (user1 != null) {
 								</tr>
 
 								<tr>
+									<%
+									String time = user1.getTimestamp() == null ? "" : user1.getTimestamp().toString();
+									%>
 									<th>Registered on :</th>
-									<td><%=user1.getTimestamp().toString()%></td>
-
+									<td><%=time%></td>
 								</tr>
 							</tbody>
 						</table>
@@ -196,7 +206,7 @@ if (user1 != null) {
 
 											<tr>
 												<th>Regitered on :</th>
-												<td><%=user1.getTimestamp().toString()%></td>
+												<td><%=time%></td>
 
 											</tr>
 											<tr>
@@ -301,8 +311,8 @@ if (user1 != null) {
 								select categories --</option>
 							<%
 							PostDao pdao = new PostDao(ConnectionProvider.getConnection());
-												List<Categories> list = pdao.getCategoryList();
-												for (Categories c : list) {
+							List<Categories> list = pdao.getCategoryList();
+							for (Categories c : list) {
 							%>
 							<option value="<%=c.getCid()%>"><%=c.getCname()%></option>
 							<%

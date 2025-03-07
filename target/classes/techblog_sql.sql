@@ -45,7 +45,7 @@ CREATE TABLE `blogpost` (
 
 LOCK TABLES `blogpost` WRITE;
 /*!40000 ALTER TABLE `blogpost` DISABLE KEYS */;
-INSERT INTO `blogpost` VALUES (1,'what is python ?','Python 🐍 - A Powerful Programming Language\r\nPython is a high-level, interpreted, and general-purpose programming language known for its simplicity, readability, and versatility. It is widely used in web development, data science, artificial intelligence, automation, game development, and more.\r\n\r\n🔥 Key Features of Python\r\n✅ Easy to Learn & Readable → Uses simple English-like syntax\r\n✅ Dynamically Typed → No need to declare variable types\r\n✅ Interpreted Language → Executes code line by line\r\n✅ Cross-Platform → Works on Windows, Linux, macOS\r\n✅ Huge Libraries & Frameworks → Django, Flask, NumPy, Pandas, TensorFlow, etc.\r\n✅ Open Source & Community Support → Free and supported by a vast community\r\n\r\n','# Print a message\r\nprint(\"Hello, World!\")\r\n\r\n# Variables & Data Types\r\nname = \"Renish\"\r\nage = 22\r\nis_student = True\r\n\r\n# Conditional Statement\r\nif age > 18:\r\n    print(\"You are an adult!\")\r\n\r\n# Loop\r\nfor i in range(5):\r\n    print(i)\r\n\r\n# Function\r\ndef greet(name):\r\n    return f\"Hello, {name}!\"\r\n\r\nprint(greet(\"Renish\"))','pythonpost.jpg','2025-02-15 17:31:27',1,1),(2,'What is java programming ?','Java programming is a high-level, object-oriented language designed for building platform-independent applications. It’s known for its \"Write Once, Run Anywhere\" capability, meaning Java programs can run on any system with a Java Virtual Machine (JVM). Java is widely used in web development, mobile apps, enterprise software, and more.\r\nKey Concepts in Java:\r\nPlatform Independent: Runs on any OS with JVM.\r\nObject-Oriented: Based on concepts like classes, objects, inheritance, and polymorphism.\r\nSimple and Secure: Easy to learn and offers security features like bytecode verification.\r\nMulti-threaded: Supports concurrent execution of tasks.\r\nRobust and Portable: Strong memory management and portability across platforms.\r\n','// Simple Java Program\r\npublic class HelloWorld {\r\n    public static void main(String[] args) {\r\n        System.out.println(\"Hello, World!\"); // Output message\r\n    }\r\n}\r\n','javapost.jpg','2025-02-20 19:24:39',2,2);
+INSERT INTO `blogpost` VALUES (1,'What is python programming ?','What is Python Programming?\r\nPython is a high-level, interpreted programming language known for its simplicity and readability. It is widely used for web development, automation, data science, artificial intelligence, machine learning, and many other applications. Python has a large ecosystem of libraries and frameworks that make development easier.\r\n\r\nFeatures of Python:\r\nEasy to Learn and Use – Simple syntax similar to English.\r\nInterpreted Language – No need for compilation; code executes line by line.\r\nDynamic Typing – No need to define variable types explicitly.\r\nObject-Oriented – Supports classes and objects.\r\nExtensive Libraries – Has many pre-built modules for various applications.','name = \"Renish\"\r\nage = 25\r\nis_programmer = True\r\n\r\nprint(f\"My name is {name} and I am {age} years old.\")\r\nprint(\"Is he a programmer?\", is_programmer)\r\n','pythonpost.jpg','2025-03-07 11:25:38',1,1),(2,'What is java programming ?','What is Java Programming?\r\nJava is a high-level, object-oriented, platform-independent programming language. It was developed by Sun Microsystems (now owned by Oracle) and is widely used for web development, enterprise applications, Android development, and more. Java follows the Write Once, Run Anywhere (WORA) principle, meaning compiled Java code can run on any platform that has a Java Virtual Machine (JVM).\r\n\r\nKey Features of Java:\r\nObject-Oriented – Supports encapsulation, inheritance, and polymorphism.\r\nPlatform-Independent – Runs on any OS with JVM.\r\nRobust and Secure – Includes exception handling and security features.\r\nMulti-threading – Supports concurrent programming.\r\nRich API & Libraries – Java has extensive libraries for various applications.\r\nGarbage Collection – Automatic memory management.','public class VariablesExample {\r\n    public static void main(String[] args) {\r\n        String name = \"Renish\";\r\n        int age = 25;\r\n        boolean isProgrammer = true;\r\n\r\n        System.out.println(\"My name is \" + name + \" and I am \" + age + \" years old.\");\r\n        System.out.println(\"Is he a programmer? \" + isProgrammer);\r\n    }\r\n}','javapost.jpg','2025-03-07 12:00:44',2,1);
 /*!40000 ALTER TABLE `blogpost` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +61,7 @@ CREATE TABLE `categories` (
   `cname` varchar(100) NOT NULL,
   `cdescription` varchar(150) NOT NULL,
   PRIMARY KEY (`cid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +70,7 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` VALUES (1,'Python Programming','This is for python programming'),(2,'Java Programming','This is for java programming');
+INSERT INTO `categories` VALUES (1,'Python Programming','This is for python programming'),(2,'Java Programming','This is for java programming'),(3,'PHP Programming','This is for java programming');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,7 +92,7 @@ CREATE TABLE `comment` (
   KEY `uid` (`uid`),
   CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `blogpost` (`pid`),
   CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -101,7 +101,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-INSERT INTO `comment` VALUES (11,'Hii, How are you?',1,1,'2025-02-20 18:58:04'),(12,'I am fine. and you ? \n😍👍🙌',1,2,'2025-02-20 19:03:08'),(13,'k',1,1,'2025-02-20 19:15:52'),(14,'Hello Nakul',1,1,'2025-02-20 19:17:16'),(15,'nice😒❤️👌',1,2,'2025-02-20 19:38:30'),(16,'Hiiii ❤️',2,2,'2025-02-20 19:39:45'),(17,'What are you doing ? men..!\n😁🤣😊',2,2,'2025-02-20 19:40:20');
+INSERT INTO `comment` VALUES (1,'Hii , I am Renish Limbasiya.',1,2,'2025-03-07 16:15:20'),(2,'This is all about java programming.',2,2,'2025-03-07 16:15:58'),(3,'ok...👌👍',2,1,'2025-03-07 16:16:46'),(4,'Why we need to learn python programming?🤔',1,1,'2025-03-07 16:18:25');
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -121,7 +121,7 @@ CREATE TABLE `liked` (
   KEY `uid` (`uid`),
   CONSTRAINT `liked_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `blogpost` (`pid`),
   CONSTRAINT `liked_ibfk_2` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -130,6 +130,7 @@ CREATE TABLE `liked` (
 
 LOCK TABLES `liked` WRITE;
 /*!40000 ALTER TABLE `liked` DISABLE KEYS */;
+INSERT INTO `liked` VALUES (12,2,1);
 /*!40000 ALTER TABLE `liked` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,9 +177,9 @@ CREATE TABLE `user` (
   `uid` bigint NOT NULL AUTO_INCREMENT,
   `uname` varchar(100) NOT NULL,
   `uemail` varchar(500) NOT NULL,
-  `upassword` varchar(500) NOT NULL,
-  `ugender` enum('Male','Female','Other') NOT NULL,
-  `uabout` varchar(1000) NOT NULL,
+  `upassword` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `ugender` enum('Male','Female','Other') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `uabout` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `uregdate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `uprofile` varchar(500) NOT NULL DEFAULT 'default.png',
   PRIMARY KEY (`uid`),
@@ -192,7 +193,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Renish Limbasiya','renish@gmail.com','$2a$12$6r94Jb4pWGye5lpte9uw0eseoQ5K93xlT9nIcjXY0A0jM6SUX2mh.','Male','Hey, I am Renish Limbasiya','2025-02-15 22:59:29','warning.png'),(2,'Nakul Parate','nakul@gmail.com','$2a$12$zUXj8ZLW0HTAhYjkRbdxTuly8x99HjCmL0xBAOBhMwhCnlNgDIPCK','Male','Hey, I am Nakul.','2025-02-20 22:35:21','default.png');
+INSERT INTO `user` VALUES (1,'Kevin Topiya','kevin@gmail.com','$2a$12$RjktqagXC2XuqVg2Bh7CKuPaHmNv1t2X81MOz98VId7/m4F038nEe','Male','Hello , I am Kevin Topiya','2025-03-07 16:52:19','img7.png'),(2,'renish Limbasiya','renish.l090@gmail.com',NULL,'Male','Hey, it is a technical blog','2025-03-07 18:42:32','renish_l090_gmail_com.jpg');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -205,4 +206,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-02-21  2:16:24
+-- Dump completed on 2025-03-07 21:52:24

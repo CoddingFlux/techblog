@@ -1,3 +1,4 @@
+<%@page import="com.techblog.dao.CommentDao"%>
 <%@page import="com.techblog.helper.ConnectionProvider"%>
 <%@page import="com.techblog.dao.LikeDao"%>
 <%@page import="com.techblog.entitties.Post"%>
@@ -14,6 +15,7 @@
         User user = (User) session.getAttribute("user");
         PostDao pdao = new PostDao(ConnectionProvider.getConnection());
         LikeDao getDao = new LikeDao(ConnectionProvider.getConnection());
+        CommentDao cdao=new CommentDao(ConnectionProvider.getConnection());
         List<Post> postlist = cid == 0 ? pdao.getAllPost() : pdao.getPostByCatId(cid);
 
         if (postlist.isEmpty()) {
@@ -51,8 +53,8 @@
                     </a>
                     <a href="pdetail?pid=<%=EncoderDecoderProvider.encrypt(pid.toString())%>"
                        class="btn btn-outline-light me-2">Read..</a>
-                    <a href="#" class="btn btn-outline-light gap-1">
-                        <i class="ri-chat-1-line"></i><span>10</span>
+                    <a href="pdetail?pid=<%=EncoderDecoderProvider.encrypt(pid.toString())%>" class="btn btn-outline-light gap-1">
+                        <i class="ri-chat-1-line"></i><span><%=cdao.countAllComment(pid)%></span>
                     </a>
                 </div>
             </div>

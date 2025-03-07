@@ -1,3 +1,6 @@
+<%@page import="com.techblog.dao.CommentDao"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="java.time.LocalDateTime"%>
 <%@page import="com.techblog.dao.LikeDao"%>
 <%@page import="com.techblog.entitties.Post"%>
 <%@page import="com.techblog.helper.ConnectionProvider"%>
@@ -5,7 +8,9 @@
 <%@page import="com.techblog.helper.EncoderDecoderProvider"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page errorPage="error" %>
+<%@ page errorPage="error"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +31,8 @@
 	PostDao pdao = new PostDao(ConnectionProvider.getConnection());
 	Post post = pdao.getPostByPostId(pid);
 	LikeDao getDao = new LikeDao(ConnectionProvider.getConnection());
-
+	CommentDao cdao=new CommentDao(ConnectionProvider.getConnection());
+	
 	boolean isUserLiked = getDao.isPostLikedByUser(pid, user.getuId());
 	%>
 
@@ -48,7 +54,13 @@
 				<div class="card-body ">
 
 					<div class="d-flex justify-content-between pudate">
-						<b><%=pdao.getUserByUid(post.getUid())%> has posted</b> <b><%=post.getPdate().toLocalDateTime()%></b>
+						<%
+						LocalDateTime dateTime = post.getPdate().toLocalDateTime();
+						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+						String formattedDate = dateTime.format(formatter);
+						%>
+						
+						<b><%=pdao.getUserByUid(post.getUid())%> has posted</b> <b><%=formattedDate%></b>
 					</div>
 					<br>
 
@@ -82,7 +94,10 @@
 								}
 								%>
 							</div>
-							<pre class="code-content"><%=post.getPcode()%></pre>
+							<%
+							pageContext.setAttribute("pcode", post.getPcode());
+							%>
+							<pre class="code-content">${fn:escapeXml(pcode)}</pre>
 						</div>
 					</div>
 
@@ -100,7 +115,7 @@
 						</a> <a href="" id="commentmsgcollapse"
 							onclick="toggleChatBox(event),loadComments(<%=pid%>)"
 							class="btn btn-outline-light"> <i class="ri-chat-1-line"></i>
-							<span>10</span>
+							<span id="cocounter"><%=cdao.countAllComment(pid)%></span>
 						</a>
 					</div>
 
@@ -123,15 +138,16 @@
 					<h5>Comments</h5>
 				</div>
 
-				<div class="my-3" style="height: 300px; width: auto; overflow: auto;">
+				<div class="my-3"
+					style="height: 300px; width: auto; overflow: auto;">
 					<div id="msgcontent"></div>
 				</div>
-	
+
 				<!-- Comment Input -->
 				<div class="d-flex align-items-center my-3 position-relative">
-					<img src="assets/pics/<%=user.getuProfile()%>"
-						class="profile-img me-2 rounded-circle" alt="User"
-						style="width: 40px; height: 40px;">
+					
+					<img src="assets/pics/<%=user.getuProfile()%>" class="profile-img me-2"
+						alt="User">
 					<div class="input-group flex-grow-1">
 						<textarea id="msgcomm" class="form-control"
 							placeholder="Write a comment..." rows="1"
@@ -139,9 +155,7 @@
 						<a href="#"
 							onclick="sendComment(event,<%=pid%>,<%=user.getuId()%>),loadComments(<%=pid%>)"
 							class="position-absolute end-0 top-50 translate-middle-y me-2"
-							style="z-index: 5;"> <i
-							class="fa fa-send-o send"
-						></i>
+							style="z-index: 5;"> <i class="fa fa-send-o send"></i>
 						</a>
 					</div>
 				</div>
@@ -149,7 +163,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<%@ include file="includes/footer.jsp"%>
 	<%@ include file="includes/scripts.jsp"%>
 

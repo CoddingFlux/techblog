@@ -69,8 +69,9 @@ for (Comment list : colist) {
 				style="width: 40px; height: 40px;">
 			<div class="flex-grow-1">
 				<div class="comment-box border rounded p-2 bg-light">
-					<p style="font-size: 0.9rem;font-weight:700;"><%=loggedInUser.getuName()%></p>
-					<pre class="mb-1 text-break" style="font-size: 0.8rem; white-space: pre-wrap; overflow-wrap: break-word; max-width: 500px;"><%=list.getComessage().trim()%></pre>
+					<p style="font-size: 0.9rem; font-weight: 700;"><%=loggedInUser.getuName()%></p>
+					<pre class="mb-1 text-break"
+						style="font-size: 0.8rem; white-space: pre-wrap; overflow-wrap: break-word; max-width: 500px;"><%=list.getComessage().trim()%></pre>
 				</div>
 				<div class="comment-actions mt-1">
 					<a href="#" class="text-decoration-none me-2">Like</a> <a href="#"
@@ -81,25 +82,29 @@ for (Comment list : colist) {
 		</div>
 	</div>
 	<%
-			} else {
-			%>
+	} else {
+	%>
 	<!-- Other User Comment (Right Side) -->
 
 	<div class="flex-grow-1 text-end">
-		<div class="comment-box border rounded p-2 bg-light" style="display: inline-block;">
-			<p style="font-size: 0.9rem;font-weight:700;"><%=userval.getuName()%></p>
-			<pre class="mb-1 text-break" style="font-size: 0.8rem; white-space: pre-wrap; overflow-wrap: break-word; max-width: 500px;"><%=list.getComessage()%></pre>
+		<div class="comment-box border rounded p-2 bg-light"
+			style="display: inline-block;">
+			<p style="font-size: 0.9rem; font-weight: 700;"><%=userval.getuName()%></p>
+			<pre class="mb-1 text-break"
+				style="font-size: 0.8rem; white-space: pre-wrap; overflow-wrap: break-word; max-width: 500px;"><%=list.getComessage()%></pre>
 		</div>
 		<div class="comment-actions mt-1">
-			<a href="#" class="text-decoration-none me-2">Like</a> <a href="#" class="text-decoration-none me-2">Reply</a> <span class="text-muted" style="font-size: 0.75rem;"><%=timeAgo%></span>
+			<a href="#" class="text-decoration-none me-2">Like</a> <a href="#"
+				class="text-decoration-none me-2">Reply</a> <span class="text-muted"
+				style="font-size: 0.75rem;"><%=timeAgo%></span>
 		</div>
 	</div>
 	<img src="assets/pics/<%=userval.getuProfile()%>"
 		class="profile-img ms-2 rounded-circle" alt="User"
 		style="width: 40px; height: 40px;">
 	<%
-			}
-			%>
+	}
+	%>
 </div>
 
 <%

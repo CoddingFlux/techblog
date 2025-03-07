@@ -16,8 +16,12 @@ import com.techblog.entitties.Comment;
 public class CommentDao {
 
 	private static final Logger logger = (Logger) LoggerFactory.getLogger(CommentDao.class);
+	
 	private static final String SAVE_COMMENT_QUERY = "INSERT INTO comment (comessage,pid,uid) VALUES (?,?,?)";
+	
 	private static final String GET_COMMENT_BY_PID_UID_QUERY = "SELECT comessage,pid,uid,potime FROM comment WHERE pid=? ORDER BY coid ASC";
+	
+	private static final String COUNT_ALL_COMMENT_QUERY = "SELECT COUNT(*) as total FROM comment WHERE pid=?";
 
 	private Connection con;
 
@@ -65,8 +69,24 @@ public class CommentDao {
 		} catch (SQLException e) {
 			logger.error("Error fetching comment for pid : {} and uid : {} : {}", pid, e.getMessage(), e);
 		}
-
 		return commentList;
-
+	}
+	
+	
+	public Long countAllComment(Long pid) {
+		Long count  = 0l;
+		
+		try(PreparedStatement pstmt = con.prepareStatement(COUNT_ALL_COMMENT_QUERY)) {
+			pstmt.setLong(1,pid);
+			
+			try(ResultSet rs = pstmt.executeQuery()){
+				if(rs.next()) {
+					return rs.getLong("total");
+				}
+			}
+		} catch (Exception e) {
+			
+		}
+		return count;
 	}
 }

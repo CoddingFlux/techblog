@@ -64,9 +64,13 @@ for (Comment list : colist) {
 	<!-- Logged-In User Comment (Left Side) -->
 	<div class="flex-grow-1 text-start">
 		<div class="d-flex align-items-start">
-			<img src="assets/pics/<%=loggedInUser.getuProfile()%>"
-				class="profile-img me-2 rounded-circle" alt="User"
-				style="width: 40px; height: 40px;">
+
+			<%
+							String climage = (!loggedInUser.getuProfile().contains("https")) ? "assets/pics/"+loggedInUser.getuProfile() : loggedInUser.getuProfile();
+						%>
+
+			<img src="<%=climage%>" class="profile-img me-2 rounded-circle"
+				alt="User" style="width: 40px; height: 40px;">
 			<div class="flex-grow-1">
 				<div class="comment-box border rounded p-2 bg-light">
 					<p style="font-size: 0.9rem; font-weight: 700;"><%=loggedInUser.getuName()%></p>
@@ -99,9 +103,11 @@ for (Comment list : colist) {
 				style="font-size: 0.75rem;"><%=timeAgo%></span>
 		</div>
 	</div>
-	<img src="assets/pics/<%=userval.getuProfile()%>"
-		class="profile-img ms-2 rounded-circle" alt="User"
-		style="width: 40px; height: 40px;">
+	<%
+							String climage1 = (!userval.getuProfile().contains("https")) ? "assets/pics/"+userval.getuProfile() : userval.getuProfile();
+						%>
+	<img src="<%=climage1%>" class="profile-img ms-2 rounded-circle"
+		alt="User" style="width: 40px; height: 40px;">
 	<%
 	}
 	%>

@@ -45,7 +45,7 @@ CREATE TABLE `blogpost` (
 
 LOCK TABLES `blogpost` WRITE;
 /*!40000 ALTER TABLE `blogpost` DISABLE KEYS */;
-INSERT INTO `blogpost` VALUES (1,'What is python programming ?','What is Python Programming?\r\nPython is a high-level, interpreted programming language known for its simplicity and readability. It is widely used for web development, automation, data science, artificial intelligence, machine learning, and many other applications. Python has a large ecosystem of libraries and frameworks that make development easier.\r\n\r\nFeatures of Python:\r\nEasy to Learn and Use – Simple syntax similar to English.\r\nInterpreted Language – No need for compilation; code executes line by line.\r\nDynamic Typing – No need to define variable types explicitly.\r\nObject-Oriented – Supports classes and objects.\r\nExtensive Libraries – Has many pre-built modules for various applications.','name = \"Renish\"\r\nage = 25\r\nis_programmer = True\r\n\r\nprint(f\"My name is {name} and I am {age} years old.\")\r\nprint(\"Is he a programmer?\", is_programmer)\r\n','pythonpost.jpg','2025-03-07 11:25:38',1,1),(2,'What is java programming ?','What is Java Programming?\r\nJava is a high-level, object-oriented, platform-independent programming language. It was developed by Sun Microsystems (now owned by Oracle) and is widely used for web development, enterprise applications, Android development, and more. Java follows the Write Once, Run Anywhere (WORA) principle, meaning compiled Java code can run on any platform that has a Java Virtual Machine (JVM).\r\n\r\nKey Features of Java:\r\nObject-Oriented – Supports encapsulation, inheritance, and polymorphism.\r\nPlatform-Independent – Runs on any OS with JVM.\r\nRobust and Secure – Includes exception handling and security features.\r\nMulti-threading – Supports concurrent programming.\r\nRich API & Libraries – Java has extensive libraries for various applications.\r\nGarbage Collection – Automatic memory management.','public class VariablesExample {\r\n    public static void main(String[] args) {\r\n        String name = \"Renish\";\r\n        int age = 25;\r\n        boolean isProgrammer = true;\r\n\r\n        System.out.println(\"My name is \" + name + \" and I am \" + age + \" years old.\");\r\n        System.out.println(\"Is he a programmer? \" + isProgrammer);\r\n    }\r\n}','javapost.jpg','2025-03-07 12:00:44',2,1);
+INSERT INTO `blogpost` VALUES (1,'What is Java programming ?','What is Java Programming?\r\nJava is a high-level, object-oriented, and platform-independent programming language developed by Sun Microsystems (now owned by Oracle) in 1995. It is widely used for building web applications, enterprise software, mobile apps (Android), and more.\r\n\r\nKey Features of Java:\r\nPlatform Independence: Write once, run anywhere (WORA) due to Java Virtual Machine (JVM).\r\nObject-Oriented: Supports concepts like classes, objects, inheritance, polymorphism, etc.\r\nSecure & Robust: Provides built-in security features like memory management and exception handling.\r\nMulti-threaded: Supports concurrent execution of programs.\r\nAutomatic Memory Management (Garbage Collection): No need for manual memory allocation.\r\n','// Class representing a Car\r\nclass Car {\r\n    String brand;  // Instance variable\r\n    int speed;\r\n\r\n    // Constructor\r\n    Car(String brand, int speed) {\r\n        this.brand = brand;\r\n        this.speed = speed;\r\n    }\r\n\r\n    // Method to display car details\r\n    void display() {\r\n        System.out.println(\"Car Brand: \" + brand);\r\n        System.out.println(\"Speed: \" + speed + \" km/h\");\r\n    }\r\n}\r\n\r\n// Main class\r\npublic class CarExample {\r\n    public static void main(String[] args) {\r\n        // Creating objects of the Car class\r\n        Car car1 = new Car(\"Toyota\", 180);\r\n        Car car2 = new Car(\"BMW\", 250);\r\n\r\n        // Display car details\r\n        car1.display();\r\n        car2.display();\r\n    }\r\n}','https://res.cloudinary.com/ddzdfupix/image/upload/v1741637080/blogpics/g8k77q2outh74un4wmbj.jpg','2025-03-10 20:04:42',2,1),(2,'What is Python programming ?','What is Python Programming?\r\nPython is a high-level, interpreted, object-oriented programming language developed by Guido van Rossum and released in 1991. It is widely used in web development, data science, artificial intelligence, machine learning, automation, and more due to its simplicity and readability.\r\n\r\nKey Features of Python:\r\nEasy to Learn & Readable → Uses simple English-like syntax.\r\nInterpreted Language → Executes code line by line (no need for compilation).\r\nDynamically Typed → No need to define variable types explicitly.\r\nObject-Oriented → Supports classes, objects, inheritance, polymorphism, etc.\r\nExtensive Libraries → Has rich built-in and third-party libraries like NumPy, Pandas, TensorFlow.\r\nPortable & Cross-Platform → Works on Windows, Linux, and MacOS.\r\n','# Declaring variables\r\nname = \"Alice\"      # String\r\nage = 25           # Integer\r\nheight = 5.5       # Float\r\nis_student = True  # Boolean\r\n\r\n# Printing variables\r\nprint(name, age, height, is_student)\r\n','https://res.cloudinary.com/ddzdfupix/image/upload/v1741639724/blogpics/gy4mbzb9wvw7dtebhcvu.jpg','2025-03-10 20:48:45',1,3);
 /*!40000 ALTER TABLE `blogpost` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,7 +101,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-INSERT INTO `comment` VALUES (1,'Hii , I am Renish Limbasiya.',1,2,'2025-03-07 16:15:20'),(2,'This is all about java programming.',2,2,'2025-03-07 16:15:58'),(3,'ok...👌👍',2,1,'2025-03-07 16:16:46'),(4,'Why we need to learn python programming?🤔',1,1,'2025-03-07 16:18:25');
+INSERT INTO `comment` VALUES (1,'hii',1,1,'2025-03-10 20:06:19'),(2,'hello i am kevin topiya 😍❤️',1,3,'2025-03-10 20:45:58'),(3,'hii',2,3,'2025-03-10 20:49:03'),(4,'hii, How are you?',1,1,'2025-03-10 20:53:35');
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -121,7 +121,7 @@ CREATE TABLE `liked` (
   KEY `uid` (`uid`),
   CONSTRAINT `liked_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `blogpost` (`pid`),
   CONSTRAINT `liked_ibfk_2` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -130,7 +130,7 @@ CREATE TABLE `liked` (
 
 LOCK TABLES `liked` WRITE;
 /*!40000 ALTER TABLE `liked` DISABLE KEYS */;
-INSERT INTO `liked` VALUES (12,2,1);
+INSERT INTO `liked` VALUES (2,1,3),(3,1,1);
 /*!40000 ALTER TABLE `liked` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -184,7 +184,7 @@ CREATE TABLE `user` (
   `uprofile` varchar(500) NOT NULL DEFAULT 'default.png',
   PRIMARY KEY (`uid`),
   UNIQUE KEY `uemail_UNIQUE` (`uemail`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -193,7 +193,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Kevin Topiya','kevin@gmail.com','$2a$12$RjktqagXC2XuqVg2Bh7CKuPaHmNv1t2X81MOz98VId7/m4F038nEe','Male','Hello , I am Kevin Topiya','2025-03-07 16:52:19','img7.png'),(2,'renish Limbasiya','renish.l090@gmail.com',NULL,'Male','Hey, it is a technical blog','2025-03-07 18:42:32','renish_l090_gmail_com.jpg');
+INSERT INTO `user` VALUES (1,'Renish Limbasiya','rlimbasiya090@gmail.com','$2a$12$sNYaChio0lUdiE8CCO.vFeI9RhbkqZnqze33cSrb9vCRGXDV5RrCy','Male','Hey, it is a technical blog','2025-03-11 01:32:35','img16.png'),(3,'Kevin Topiya','kevin@gmail.com','$2a$12$SOYF5cAIrzmjje4.Fe5h6.u.kJNDeTv/ifr0WEybLRduSTJ7bxWQi','Male','hey , I am Limbasiya Renish.','2025-03-11 02:04:52','img8.png');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -206,4 +206,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-03-07 21:52:24
+-- Dump completed on 2025-03-11  2:39:26

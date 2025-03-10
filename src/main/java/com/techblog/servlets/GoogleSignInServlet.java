@@ -1,13 +1,6 @@
 package com.techblog.servlets;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 
 import org.slf4j.LoggerFactory;
 
@@ -16,6 +9,7 @@ import com.google.firebase.auth.FirebaseToken;
 import com.techblog.dao.UserDao;
 import com.techblog.entitties.User;
 import com.techblog.helper.ConnectionProvider;
+import com.techblog.helper.FileManager;
 import com.techblog.securityconfig.FirebaseInitializer;
 import com.techblog.securityconfig.JwtUtility;
 
@@ -72,71 +66,35 @@ public class GoogleSignInServlet extends HttpServlet {
 				String uemail = decodeToken.getEmail();
 				String uname = decodeToken.getName();
 				String uprofile = decodeToken.getPicture();
-				
 
-				try {
-				    String fileName = uemail.replaceAll("[^a-zA-Z0-9]", "_") + ".jpg";
-				    String uploadDir = "assets/pics/"; // Relative to project root
-				    
-				    // Get absolute path of the `assets/pics/` folder
-				    String absoluteUploadDir = getServletContext().getRealPath("/") + uploadDir;
-				    Path uploadPath = Path.of(absoluteUploadDir);
-				    Path filePath = uploadPath.resolve(fileName);
+//				uprofile = FileManager.saveGoogleProfileImage(req,uprofile, uemail);
 
-				    // Ensure directory exists
-				    if (!Files.exists(uploadPath)) {
-				        Files.createDirectories(uploadPath);
-				    }
-
-				    // Check if the file already exists
-				    if (!Files.exists(filePath)) {
-				        HttpClient client = HttpClient.newHttpClient();
-				        HttpRequest request = HttpRequest.newBuilder()
-				                .uri(URI.create(uprofile))
-				                .GET()
-				                .build();
-
-				        HttpResponse<byte[]> response = client.send(request, HttpResponse.BodyHandlers.ofByteArray());
-
-				        if (response.statusCode() == 200) { // HTTP 200 OK
-				            Files.write(filePath, response.body(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
-				            logger.info("✅ Profile image saved: " + filePath.toString());
-				        } else {
-				            logger.warn("⚠️ Failed to download profile image. HTTP Status: " + response.statusCode());
-				        }
-				    } else {
-				        logger.info("🖼️ Profile image already exists: " + filePath.toString());
-				    }
-
-				    // Update user profile to use the local path
-				    uprofile = fileName;
-
-				} catch (IOException | InterruptedException e) {
-				    logger.error("❌ Failed to download profile image: {}", e.getMessage(), e);
-				}
-
-				
 				String token = JwtUtility.generateToken(uemail);
 				UserDao udao = new UserDao(ConnectionProvider.getConnection());
-				user = new User(0l,uemail,uname,uprofile);
 				try {
 					if (!udao.isUserRegistered(uemail)) {
+						uprofile = FileManager.uploadImgOnCloudinary(uprofile,null,"upropics");
+					
+						user = new User(0l, uemail, uname, uprofile);
+						
 						if (udao.saveData(user)) {
-							System.out.print("{\"status\":\"success\", \"message\":\"Registration successful!\", \"redirect\":\"login\"}");
+							user=udao.getUserByEmail(uemail);
+							user.setuEmail(uemail);
+//							System.out.print("{\"status\":\"success\", \"message\":\"Registration successful!\", \"redirect\":\"login\"}");
 						} else {
-							System.out.print("{\"status\":\"badwarn\", \"message\":\"Email already registered!\"}");
+//							System.out.print("{\"status\":\"badwarn\", \"message\":\"Email already registered!\"}");
 						}
 					} else {
-						System.out.print("{\"status\":\"badwarn\", \"message\":\"Email already registered!\"}");
+						user=udao.getUserByEmail(uemail);
+						
+						user.setuEmail(uemail);
+//						System.out.print("{\"status\":\"badwarn\", \"message\":\"Email already registered!\"}");
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
-					System.out.print("{\"status\":\"badwarn\", \"message\":\"Error to register email!\"}");	
+//					System.out.print("{\"status\":\"badwarn\", \"message\":\"Error to register email!\"}");
 				}
 
-				User useralldetail=udao.getUserByEmail(uemail);
-				System.out.println("Uid is : "+useralldetail.getuId());
-				user = new User(useralldetail.getuId(),uname,uemail,"",useralldetail.getuGender(),useralldetail.getuAbout(),uprofile,useralldetail.getTimestamp());
 				httpSession.setAttribute("jwt_token", token);
 				httpSession.setAttribute("user", user);
 				httpSession.setAttribute("idtoken", idToken);

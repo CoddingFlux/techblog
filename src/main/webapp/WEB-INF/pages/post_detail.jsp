@@ -47,7 +47,11 @@
 
 				</div>
 
-				<img alt="" src="assets/blog_pics/<%=post.getPimage()%>"
+				<%
+							String postimage = (!post.getPimage().contains("https")) ? "assets/pics/"+post.getPimage() : post.getPimage();
+						%>
+
+				<img alt="" src="<%=postimage%>"
 					class="card-image-top pdetailimg" />
 
 
@@ -59,7 +63,7 @@
 						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 						String formattedDate = dateTime.format(formatter);
 						%>
-						
+
 						<b><%=pdao.getUserByUid(post.getUid())%> has posted</b> <b><%=formattedDate%></b>
 					</div>
 					<br>
@@ -145,8 +149,13 @@
 
 				<!-- Comment Input -->
 				<div class="d-flex align-items-center my-3 position-relative">
-					
-					<img src="assets/pics/<%=user.getuProfile()%>" class="profile-img me-2"
+
+<%
+							String climage = (!user.getuProfile().contains("https")) ? "assets/pics/"+user.getuProfile() : user.getuProfile();
+						%>
+
+
+					<img src="<%=climage%>" class="profile-img me-2"
 						alt="User">
 					<div class="input-group flex-grow-1">
 						<textarea id="msgcomm" class="form-control"

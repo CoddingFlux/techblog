@@ -23,7 +23,7 @@ public class UserDao {
 
 	private static final Logger logger = (Logger) LoggerFactory.getLogger(UserDao.class);
 
-	private static final String INSERT_USER_QUERY = "INSERT INTO user (uname, uemail, upassword, ugender, uabout) VALUES (?, ?, ?, ?, ?)";
+	private static final String INSERT_USER_QUERY = "INSERT INTO user (uname, uemail, upassword, ugender, uabout,uprofile) VALUES (?, ?, ?, ?, ?,?)";
 
 	private static final String GET_USER_BY_EMAIL_AND_PASSWORD_QUERY = "SELECT uid, uname, uemail, upassword, ugender, uabout, uprofile, uregdate FROM user WHERE uemail=?";
 
@@ -59,6 +59,7 @@ public class UserDao {
 			pstmt.setString(3, user.getuPassword() == null ? null : HashingProvider.hashProvider(user.getuPassword()));
 			pstmt.setString(4, user.getuGender() == null ? null : user.getuGender());
 			pstmt.setString(5, user.getuAbout() == null ? "Hey, it is a technical blog" : user.getuAbout());
+			pstmt.setString(6,user.getuProfile()== null ? "default.png":user.getuProfile());
 
 			return pstmt.executeUpdate() > 0;
 		} catch (SQLException e) {

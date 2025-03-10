@@ -103,9 +103,12 @@ if (user1 != null) {
 
 					<div class="text-center">
 						
+						<%
+							String climage = (!user1.getuProfile().contains("https")) ? "assets/pics/"+user1.getuProfile() : user1.getuProfile();
+						%>
 
 						<img class="image-fluid profile-pics"
-							src="assets/pics/<%=user1.getuProfile()%>"
+							src="<%=climage%>"
 							alt="user_profile" loading="lazy"/>
 
 						<h5 class="lead mt-3 mb-3"><%=user1.getuName()%></h5>

@@ -30,7 +30,12 @@
         <div class="col-12 col-md-6 mb-3 d-flex"> <!-- Responsive with equal height -->
             <div class="card shadow-sm flex-grow-1 d-flex flex-column"> <!-- Stretch card to full height -->
                 <div class="p-1">
-                    <img src="assets/blog_pics/<%=pst.getPimage()%>" 
+                
+                <%
+							String postimage = (!pst.getPimage().contains("https")) ? "assets/pics/"+pst.getPimage() : pst.getPimage();
+						%>
+                
+                    <img src="<%=postimage%>" 
                          class="card-img-top post-pics img-fluid w-100 p-2" 
                          alt="Post Image">
                 </div>

@@ -1,6 +1,6 @@
 package com.techblog.servlets;
 
-import java.io.File;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -50,29 +50,37 @@ public class AddPostServlet extends HttpServlet {
 			String pcode = req.getParameter("pcode");
 
 			Part part = req.getPart("pimage");
-			String pimage = (part != null) ? part.getSubmittedFileName() : "";
+			String pimage = "";
 
 			// Validate required fields
-			if (cid == 0 || ptitle.isEmpty() || pcontent.isEmpty()) {
+			if (cid == 0 || ptitle == null || ptitle.isEmpty() || pcontent == null || pcontent.isEmpty()) {
 				pw.print("{\"status\":\"error\", \"message\":\"Missing required fields\"}");
 				return;
 			}
 
+			// 🔹 Upload image to Cloudinary (if exists)
+			if (part != null && part.getSize() > 0) {
+				pimage = FileManager.uploadImgOnCloudinary(null, part,"blogpics");
+				if (pimage == null || pimage.isEmpty()) {
+					pw.print("{\"status\":\"error\", \"message\":\"Image upload failed. Try again later.\"}");
+					return;
+				}
+			}
+
 			Post post = new Post(ptitle, pcontent, pcode, pimage, cid, uid);
 
+			// 🔹 Save post in DB
 			if (postDao.savePost(post)) {
-				if (!pimage.isEmpty()) {
-					String path = req.getServletContext().getRealPath("assets/blog_pics") + File.separator + pimage;
-					FileManager.saveFile(part.getInputStream(), path);
-				}
 				pw.print("{\"status\":\"success\", \"message\":\"Posted successful!\", \"redirect\":\"login\"}");
 			} else {
 				pw.print("{\"status\":\"error\", \"message\":\"Database error\"}");
 			}
 		} catch (NumberFormatException e) {
-			logger.error("Invalid category ID : {}", e);
+			logger.error("Invalid category ID: {}", e.getMessage());
+			resp.getWriter().print("{\"status\":\"error\", \"message\":\"Invalid category ID\"}");
 		} catch (Exception e) {
-			logger.error("Error processing post request : {}", e);
+			logger.error("Error processing post request: {}", e.getMessage());
+			resp.getWriter().print("{\"status\":\"error\", \"message\":\"An unexpected error occurred\"}");
 		}
 	}
 }

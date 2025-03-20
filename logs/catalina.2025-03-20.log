@@ -1,0 +1,35 @@
+20-Mar-2025 14:42:54.333 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/11.0.2
+20-Mar-2025 14:42:54.363 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Dec 5 2024 15:19:37 UTC
+20-Mar-2025 14:42:54.364 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 11.0.2.0
+20-Mar-2025 14:42:54.367 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Linux
+20-Mar-2025 14:42:54.367 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            5.15.167.4-microsoft-standard-WSL2
+20-Mar-2025 14:42:54.367 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+20-Mar-2025 14:42:54.367 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /opt/java/openjdk
+20-Mar-2025 14:42:54.367 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           21.0.6+7-LTS
+20-Mar-2025 14:42:54.367 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Eclipse Adoptium
+20-Mar-2025 14:42:54.367 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /usr/local/tomcat
+20-Mar-2025 14:42:54.368 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /usr/local/tomcat
+20-Mar-2025 14:42:54.413 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/usr/local/tomcat/conf/logging.properties
+20-Mar-2025 14:42:54.414 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+20-Mar-2025 14:42:54.414 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+20-Mar-2025 14:42:54.414 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+20-Mar-2025 14:42:54.414 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+20-Mar-2025 14:42:54.415 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+20-Mar-2025 14:42:54.415 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util=ALL-UNNAMED
+20-Mar-2025 14:42:54.415 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+20-Mar-2025 14:42:54.415 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+20-Mar-2025 14:42:54.415 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --enable-native-access=ALL-UNNAMED
+20-Mar-2025 14:42:54.419 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/usr/local/tomcat
+20-Mar-2025 14:42:54.423 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/usr/local/tomcat
+20-Mar-2025 14:42:54.423 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/usr/local/tomcat/temp
+20-Mar-2025 14:42:54.449 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Loaded Apache Tomcat Native library [2.0.8] using APR version [1.7.2].
+20-Mar-2025 14:42:54.472 INFO [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL successfully initialized [OpenSSL 3.0.13 30 Jan 2024]
+20-Mar-2025 14:42:55.043 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+20-Mar-2025 14:42:55.097 INFO [main] org.apache.catalina.startup.Catalina.load Server initialization in [1101] milliseconds
+20-Mar-2025 14:42:55.191 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+20-Mar-2025 14:42:55.191 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/11.0.2]
+20-Mar-2025 14:42:55.243 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [/usr/local/tomcat/webapps/techblog.war]
+20-Mar-2025 14:42:59.738 INFO [main] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+20-Mar-2025 14:43:02.309 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [/usr/local/tomcat/webapps/techblog.war] has finished in [7,064] ms
+20-Mar-2025 14:43:02.329 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+20-Mar-2025 14:43:02.381 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [7278] milliseconds

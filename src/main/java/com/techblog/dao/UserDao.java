@@ -22,20 +22,35 @@ public class UserDao {
 	}
 
 	private static final Logger logger = (Logger) LoggerFactory.getLogger(UserDao.class);
+	
+	private static final String INSERT_USER_QUERY = "INSERT INTO \"user\" (uname, uemail, upassword, ugender, uabout, uprofile) VALUES (?, ?, ?, ?, ?, ?)";
 
-	private static final String INSERT_USER_QUERY = "INSERT INTO user (uname, uemail, upassword, ugender, uabout,uprofile) VALUES (?, ?, ?, ?, ?,?)";
+	private static final String GET_USER_BY_EMAIL_AND_PASSWORD_QUERY = "SELECT uid, uname, uemail, upassword, ugender, uabout, uprofile, uregdate FROM \"user\" WHERE uemail = ?";
 
-	private static final String GET_USER_BY_EMAIL_AND_PASSWORD_QUERY = "SELECT uid, uname, uemail, upassword, ugender, uabout, uprofile, uregdate FROM user WHERE uemail=?";
+	private static final String UPDATE_USER_QUERY = "UPDATE \"user\" SET uname = ?, uemail = ?, ugender = ?, uabout = ?, uprofile = ? WHERE uid = ?";
 
-	private static final String UPDATE_USER_QUERY = "UPDATE user SET uname=?, uemail=?, ugender=?, uabout=?, uprofile=? WHERE uid=?";
+	private static final String UPDATE_PASSWORD_QUERY = "UPDATE \"user\" SET upassword = ? WHERE uid = ?";
 
-	private static final String UPDATE_PASSWORD_QUERY = "UPDATE user SET upassword=? WHERE uid=?";
+	private static final String GET_USER_BY_UID_QUERY = "SELECT uname, uprofile FROM \"user\" WHERE uid = ?";
 
-	private static final String GET_USER_BY_UID_QUERY = "SELECT uname,uprofile FROM user WHERE uid=?";
+	private static final String GET_USER_BY_EMAIL_QUERY = "SELECT uid, uname, ugender, uabout, uregdate, uprofile FROM \"user\" WHERE uemail = ?";
 
-	private static final String GET_USER_BY_EMAIL_QUERY = "SELECT uid,uname,ugender,uabout,uregdate,uprofile FROM user WHERE uemail=?";
-
-	private static final String GET_REGISTERED_USER_QUERY = "SELECT uid FROM user WHERE uemail=?";
+	private static final String GET_REGISTERED_USER_QUERY = "SELECT uid FROM \"user\" WHERE uemail = ?";
+	
+	
+//	private static final String INSERT_USER_QUERY = "INSERT INTO user (uname, uemail, upassword, ugender, uabout,uprofile) VALUES (?, ?, ?, ?, ?,?)";
+//
+//	private static final String GET_USER_BY_EMAIL_AND_PASSWORD_QUERY = "SELECT uid, uname, uemail, upassword, ugender, uabout, uprofile, uregdate FROM user WHERE uemail=?";
+//
+//	private static final String UPDATE_USER_QUERY = "UPDATE user SET uname=?, uemail=?, ugender=?, uabout=?, uprofile=? WHERE uid=?";
+//
+//	private static final String UPDATE_PASSWORD_QUERY = "UPDATE user SET upassword=? WHERE uid=?";
+//
+//	private static final String GET_USER_BY_UID_QUERY = "SELECT uname,uprofile FROM user WHERE uid=?";
+//
+//	private static final String GET_USER_BY_EMAIL_QUERY = "SELECT uid,uname,ugender,uabout,uregdate,uprofile FROM user WHERE uemail=?";
+//
+//	private static final String GET_REGISTERED_USER_QUERY = "SELECT uid FROM user WHERE uemail=?";
 
 	public boolean isUserRegistered(String emailid) {
 		try (PreparedStatement pstmt = con.prepareStatement(GET_REGISTERED_USER_QUERY)) {

@@ -14,7 +14,8 @@ import ch.qos.logback.classic.Logger;
 public class FirebaseInitializer {
 
 	private static boolean initialized = false;
-	private static String path="E:\\D\\Projects\\3_Java\\3_Java_Servlet\\ServletProject\\PrivateKeys\\TechBlogSecret.json";
+//	private static String path="E:\\D\\Projects\\3_Java\\3_Java_Servlet\\ServletProject\\PrivateKeys\\TechBlogSecret.json";
+	private static String path="/app/PrivateKeys/TechBlogSecret.json";
 	private static final Logger logger = (Logger) LoggerFactory.getLogger(FirebaseInitializer.class);
 
 	

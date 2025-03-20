@@ -35,7 +35,7 @@ public class PostDao {
 
 	private static final String GET_POST_BY_ID_QUERY = "SELECT ptitle, pcontent, pcode, pdate, pimage, cid, uid FROM blogpost WHERE pid=?";
 
-	private static final String GET_USER_BY_ID_QUERY = "SELECT uname FROM user WHERE uid=?";
+	private static final String GET_USER_BY_ID_QUERY = "SELECT uname FROM \"user\" WHERE uid=?";
 
 	private static final String GET_TOP_POST_QUERY = "SELECT pid, ptitle, pcontent FROM blogpost ORDER BY pdate DESC LIMIT 10";
 

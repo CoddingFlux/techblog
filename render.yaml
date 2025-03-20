@@ -1,0 +1,29 @@
+services:
+  - name: techblog-db
+    type: pserv  # PostgreSQL managed service
+    plan: free   # Choose "free", "starter", or "pro" based on your needs
+    envVars:
+      - key: POSTGRES_USER
+        value: techuser
+      - key: POSTGRES_PASSWORD
+        sync: false  # Set manually in Render for security
+      - key: POSTGRES_DB
+        value: techblogdb_6li7
+
+  - name: techblog
+    type: web
+    repo: https://github.com/CoddingFlux/techblog.git  # Change to your actual GitHub repo
+    branch: main  # Change to the branch you want to deploy
+    buildCommand: ./mvnw clean package  # Adjust if using Gradle or another build system
+    startCommand: java -jar target/techblog.jar  # Replace with your actual JAR file name
+    envVars:
+      - key: DB_HOST
+        value: dpg-your-db-host.oregon-postgres.render.com  # Replace with actual Render PostgreSQL hostname
+      - key: DB_PORT
+        value: "5432"
+      - key: DB_NAME
+        value: techblogdb_6li7
+      - key: DB_USER
+        value: techuser
+      - key: DB_PASSWORD
+        sync: false  # Set manually in Render

@@ -117,5 +117,5 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 🙋‍♂️ Author
 Renish Limbasiya
-📧 renishlimbasiya@example.com
+📧 renish.l090@gmail.com
 🔗 LinkedIn | GitHub
